@@ -1,0 +1,1 @@
+print("Timmy is tired")
