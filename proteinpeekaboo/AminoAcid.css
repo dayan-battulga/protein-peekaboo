@@ -1,0 +1,35 @@
+.amino-acid-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.amino-acid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+
+.amino-acid-container {
+    display: flex;
+    height: 55vh;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.no-results-page{
+    display: flex;
+    height: 55vh;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+h3 {
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+p {
+    font-family: "Lucida Console", "Courier New", monospace;
+}
