@@ -9,13 +9,12 @@ class DNAtoProtein2:
     def convert(self, dnaString):
         dna_seq = Seq(dnaString)
         rna_seq = Seq(transcribe(dna_seq))
+
         result_handle = (NCBIWWW.qblast("blastx", "nr", rna_seq, entrez_query="primates[ORGN]"))
-        out_handle = open("my_blast.xml", "w")
-        out_handle.write(result_handle.read())
-        result_handle.close()
-        out_handle.close()
-        result_handle = open("my_blast.xml")
-        blast_records = NCBIXML.parse(result_handle)
+        
+        with open("my_blast.xml", "w") as out_handle:
+            out_handle.write(result_handle.read())
+
         e_value_thresh = 0.004
         common_proteins = ["heat protein", "hemoglobin", "collagen", "actin", "myosin", "keratin", "insulin", 
                            "albumin", "fibrinogen", "immunoglobulin", "enzyme", "ferritin", "tubulin", "fibronectin", 
@@ -23,21 +22,27 @@ class DNAtoProtein2:
                            "myoglobin", "erythropoietin", "prothrombin", "collagenase", "nicotinamide", "lysine", 
                            "cytochrome"]
         
-        titles = []
+        with open("my_blast.xml") as result_handle:
+            blast_records = NCBIXML.parse(result_handle)
 
-        for blast_record in blast_records:
-            for alignment in blast_record.alignments:
-                for hsp in alignment.hsps:
-                    if hsp.expect < e_value_thresh:
-                        if alignment.title not in titles:
-                            title = alignment.title.split()[1].lower().rstrip(",")
-                            if (title.startswith(("heat", "hsp", "hcg")) or title in common_proteins):
-                                titles.append(title)
+            titles = set()
 
-        titles = list(set(titles))
+            for blast_record in blast_records:
+                for alignment in blast_record.alignments:
+                    for hsp in alignment.hsps:
+                        if len(titles) < 3 and hsp.expect < e_value_thresh:
+                            if alignment.title not in titles:
+                                title = alignment.title.split()[1].lower().rstrip(",")
+                                if (title.startswith(("heat", "hsp", "hcg")) or title in common_proteins):
+                                    titles.add(title)
+                        else:
+                            break
 
-        for title in titles:
-            print(title)
+        print( titles)
 
 temp = DNAtoProtein2()
-temp.convert("input")
+temp.convert("1 caaggtcaaa taccaagatt ttttcttctt tgtcagtctt gtccaaacca taagcaagag"+
+     "  61 ctgctgcagt tggttcgtta acaatacgtt ctacttcaag accagcaatt ttaccagcgt"+
+     " 121 cttttgttgc ttgacgttga gcgtcgttga agtaagccgg aactgtgata acagctttgg"+
+     " 181 ttactttctc accaaggtag tcttcagcgt agcctttcaa gtattgaagg atcatagctg"+
+     " 241 agatttcttg tggagtgtat tctttccatt tgcagaaact ttttcagaag ttcccatctt")
