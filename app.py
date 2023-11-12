@@ -21,30 +21,30 @@ class DNAtoProtein2:
         result_handle.close()
         out_handle.close()
         
-        e_value_thresh = 0.004
-        common_proteins = ["heat protein", "hemoglobin", "collagen", "actin", "myosin", "keratin", "insulin", 
-                           "albumin", "fibrinogen", "immunoglobulin", "enzyme", "ferritin", "tubulin", "fibronectin", 
-                           "thrombin", "histone", "elastin", "transthyretin", "cytokeratin", "casein", "globulin", 
-                           "myoglobin", "erythropoietin", "prothrombin", "collagenase", "nicotinamide", "lysine", 
-                           "cytochrome"]
+        min_evalue = 0.0000001
     
         result_handle = open("my_blast.xml")
         blast_records = NCBIXML.parse(result_handle)
 
-        titles = set()
+        title_evalues = {}
+        titles = []
 
         for blast_record in blast_records:
             for alignment in blast_record.alignments:
                 for hsp in alignment.hsps:
-                    if len(titles) < 3 and hsp.expect < e_value_thresh:
-                        if alignment.title not in titles:
-                            title = alignment.title.split()[1].lower().rstrip(",")
-                            if (title.startswith(("heat", "hcg")) or title in common_proteins):
-                                titles.add(title)
-                    else:
-                        break
-        
+                    if hsp.expect < min_evalue:
+                        aligntitle = alignment.title
+                        aligntitle.split(',')[0]
+                        aligntitle.join(" ")
+                        title_evalues[hsp.expect] = aligntitle
+
+
         result_handle.close()
+
+        evalues = sorted(title_evalues.keys())[:3]
+        
+        for evalue in evalues:
+            titles.append(title_evalues[evalue] + " e = " + str(evalue))
 
         return titles 
 
