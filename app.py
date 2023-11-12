@@ -44,6 +44,8 @@ class DNAtoProtein2:
                     else:
                         break
         
+        result_handle.close()
+
         return titles 
 
 temp = DNAtoProtein2()
