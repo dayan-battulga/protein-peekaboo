@@ -1,0 +1,7 @@
+.citation {
+    display:flex;
+    justify-content: center;
+    font-size: 15px;
+    margin-right: 50px;
+    margin-top: 20px;
+}

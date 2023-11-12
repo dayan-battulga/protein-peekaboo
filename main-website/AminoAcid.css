@@ -1,0 +1,76 @@
+.amino-acid-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.amino-acid {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 20% !important;
+    opacity: 0;
+    animation: showcase 3s ease-in-out forwards;
+}
+
+.amino-acid:nth-child(1) {
+    animation-delay: -0.1s;
+}
+.amino-acid:nth-child(2) {
+    animation-delay: -0.3;
+}
+
+.amino-acid:nth-child(3) {
+    animation-delay: -0.5s;
+}
+
+
+@keyframes showcase {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.amino-acid-container {
+    display: flex;
+    height: 55vh;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+span {
+    text-decoration: underline;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 2em;
+    animation: showcase 1s ease-in-out;
+}
+
+.no-results-page{
+    display: flex;
+    height: 55vh;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.amino-title {
+    display: flex;
+    text-align: center;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 1em;
+    width: 100%;
+}
+
+p {
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+img {
+    height: 80%;
+    width: 100%;
+    object-fit:cover;
+}

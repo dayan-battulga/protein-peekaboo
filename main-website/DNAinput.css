@@ -1,0 +1,8 @@
+.DNAinput {
+    display:flex;
+    justify-content: center;
+}
+
+.DNAinput-container {
+    display: flex;
+}
