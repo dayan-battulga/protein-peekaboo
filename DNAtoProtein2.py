@@ -6,21 +6,6 @@ NCBIWWW.email = "booey475@gmail.com"
 
 class DNAtoProtein2:
     def convert(self, dnaString):
-        dnaString = ("caaggtcaaa taccaagatt ttttcttctt tgtcagtctt gtccaaacca taagcaagag" +
-      " 61 ctgctgcagt tggttcgtta acaatacgtt ctacttcaag accagcaatt ttaccagcgt" +
-      "121 cttttgttgc ttgacgttga gcgtcgttga agtaagccgg aactgtgata acagctttgg" +
-      "181 ttactttctc accaaggtag tcttcagcgt agcctttcaa gtattgaagg atcatagctg" +
-      "241 agatttcttg tggagtgtat tctttccatt tgcagaaact ttttcagaag ttcccatctt" +
-      "301 agatttgata gagataactg tatctgggtt tgtaactgct tgacgttttg cagcatcacc" +
-      "361 acgatgattt ctccgttttt gaatgagact acagatggag ttgtgcggtt tccttctggg" +
-      "421 tttgcgatga ttttgctttc agttccttca agaactgcaa ctgctgagtt tgttgtacct" +
-      "481 aagtcaatac cgataatttt agacatgtgt ttttctcctt gttagttaat tttctatttt" +
-      "541 tctttttgat actcttctta agtggcgaca gtggcgacgc cgtcagagct tgacttcgtc" +
-      "601 aatctctttg actaaacttt gagcctaagg tctcaaaatt tgcgcaaata gcgccacggc" +
-      "661 gaagagtatc gtgtttggtt cgcttcgctc actattacaa agccaaacat attttatctt" +
-      "721 tcttcatagt ttattgtcgt ttcggacaag ttttcttatg taaattgcga cacgaggagt" +
-      "781 cgaaatcgat tttatttcga cgacgagtta gtaaggaagc taggcaaacg ccatagcgat")
-
         dna_seq = Seq(dnaString)
         rna_seq = Seq(transcribe(dna_seq))
         result_handle = (NCBIWWW.qblast("blastx", "nr", rna_seq,
